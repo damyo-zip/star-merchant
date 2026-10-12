@@ -112,6 +112,43 @@ h3 { margin: 0; font-size: 13px; font-weight: 650; }
 .victory[hidden] { display: none; }
 .victory > span { color: var(--mint); font-size: 34px; }
 .victory p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+.mission-shortcut { width: 100%; min-height: 44px; padding: 10px 12px; margin-bottom: 8px; text-align: left; border: 1px solid #68e4c044; border-radius: 6px; color: var(--mint); background: #68e4c009; font-size: 12px; }
+.market-news { margin: 0 0 14px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.market-news summary { min-height: 44px; padding: 10px 2px; cursor: pointer; color: #e7c67e; font-size: 12px; line-height: 1.6; }
+.market-news summary:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+.market-news p, .route-news p:not(.eyebrow) { font-size: 12px; margin: 8px 0; line-height: 1.7; color: #d1dbe6; }
+.market-news small, .route-news small { color: var(--muted); font-size: 11px; line-height: 1.7; }
+.route-news { padding: 12px; background: #e7c67e08; border: 1px solid #e7c67e26; border-radius: 6px; margin: 0 0 14px; }
+.route-news .eyebrow { color: #e7c67e; }
+.sale-preview { font-size: 11px; color: var(--mint); margin: -3px 0 10px; }
+.sale-preview.loss { color: #ffb1a0; }
+.career-stats { display: grid; gap: 8px; padding: 0 0 16px; color: var(--muted); font-size: 12px; }
+.career-stats span { display: flex; justify-content: space-between; gap: 8px; }
+.career-stats strong { color: var(--mint); font-family: ui-monospace, monospace; }
+.ship-upgrade { padding: 16px 0; border-top: 1px solid var(--line); }
+.ship-upgrade h3 { font-size: 14px; }
+.ship-upgrade p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.ship-upgrade button { width: 100%; min-height: 44px; }
+.ship-upgrade .upgrade-note { font-size: 11px; }
+.contracts { grid-column: 1 / -1; }
+.contract-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.contract-card { border: 1px solid var(--line); border-radius: 7px; background: #0c1522; padding: 16px; }
+.contract-card h3 { font-size: 16px; }
+.contract-card p { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 10px 0; }
+.contract-card p strong { color: var(--text); }
+.contract-card .contract-reward { color: #e7c67e; font: 700 18px ui-monospace, monospace; }
+.contract-reward small { display: block; font: 11px system-ui, sans-serif; color: var(--muted); margin-top: 5px; }
+.contract-card button { min-height: 44px; }
+.contract-card > button { width: 100%; }
+.contract-card button:disabled, .ship-upgrade button:disabled { opacity: .45; }
+.active-contract { margin-bottom: 20px; border-color: #68e4c055; background: #68e4c009; }
+.active-contract .eyebrow { color: var(--mint); font-size: 10px; }
+.contract-card .contract-status { color: var(--text); }
+.contract-actions { display: flex; gap: 10px; }
+.contract-actions .buy-button { flex: 1; }
+.offers-title { color: var(--muted); margin: 0 0 12px; font-size: 13px; }
+.contract-rules, .empty-contract { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.empty-contract { padding: 12px; border: 1px dashed var(--line); border-radius: 5px; margin: 0 0 20px; }
 footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding: 20px 0 28px; margin-top: 28px; color: #7c8b9e; font-size: 10px; }
 footer > span:first-child { font-family: ui-monospace, monospace; letter-spacing: 1px; }
 footer b { font-weight: 400; color: #526176; }
@@ -180,10 +217,15 @@ footer b { font-weight: 400; color: #526176; }
   .market-note, .captain-tip p:not(.eyebrow) { font-size: 12px; }
   .cargo-row strong { font-size: 15px; }
   .cargo-row small { font-size: 12px; }
-  .mobile-nav { position: fixed; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; z-index: 40; bottom: 0; left: 0; right: 0; padding: 8px max(12px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); background: #0c1522; border-top: 1px solid var(--line); }
-  .mobile-nav button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border: 1px solid transparent; border-radius: 6px; color: #b9c6d6; background: transparent; font-size: 14px; }
+  .mobile-nav { position: fixed; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; z-index: 40; bottom: 0; left: 0; right: 0; padding: 8px max(12px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); background: #0c1522; border-top: 1px solid var(--line); }
+  .mobile-nav button { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; border: 1px solid transparent; border-radius: 6px; color: #b9c6d6; background: transparent; font-size: 12px; }
   .mobile-nav button[aria-pressed="true"] { color: var(--mint); background: #68e4c015; border-color: #68e4c044; }
-  .mobile-nav button > span { font-size: 20px; }
+  .mobile-nav button > span { font-size: 18px; }
+  .contract-offers { grid-template-columns: minmax(0, 1fr); }
+  .contract-card { padding: 14px; }
+  .contract-card button { min-height: 48px; font-size: 14px; }
+  .sale-preview { font-size: 12px; }
+  .ship-upgrade button { min-height: 48px; font-size: 14px; }
   .mobile-toast:not([hidden]) { display: block; position: fixed; z-index: 30; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); padding: 12px 14px; border: 1px solid #68e4c077; border-radius: 8px; background: #142b2a; box-shadow: 0 8px 28px #0008; font-size: 13px; color: #d0f4e8; pointer-events: none; }
   .mobile-toast.error { border-color: #f28b72; background: #342027; color: #ffb1a0; }
 }

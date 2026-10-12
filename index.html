@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a101b">
   <title>STAR MERCHANT · 작은 우주 무역</title>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="game.js"></script>
-  <script defer src="ui.js"></script>
+  <link rel="stylesheet" href="styles.css?v=1.1">
+  <script defer src="game.js?v=1.1"></script>
+  <script defer src="ui.js?v=1.1"></script>
 </head>
 <body>
   <div class="shell">
@@ -30,13 +30,14 @@
       </section>
 
       <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">통신 연결 완료. 테라 시장에서 첫 거래를 시작하세요.</div>
-      <section id="victory" class="victory" hidden><span aria-hidden="true">✦</span><div><h2>은하의 무역왕이 되었습니다!</h2><p>목표 자산 10,000 C 달성. 계속 교역하거나 새 항해를 시작하세요.</p></div></section>
+      <section id="victory" class="victory" hidden><span aria-hidden="true">✦</span><div><h2>은하의 무역왕이 되었습니다!</h2><p id="victory-detail"></p></div></section>
 
       <div class="dashboard">
         <section id="screen-routes" class="panel destinations" aria-labelledby="route-title">
           <div class="panel-heading"><div><p class="eyebrow">NAVIGATION</p><h2 id="route-title">행성 항로</h2></div><span class="badge">05</span></div>
           <p class="panel-hint">현재 시세를 비교하고 눌러 이동하세요.</p>
           <p class="route-legend">◇ 수정 · ▱ 합금 · ✳ 향신료 · 개당 C</p>
+          <div id="route-news" class="route-news"></div>
           <div id="planet-list" class="planet-list"></div>
           <div class="route-note"><span aria-hidden="true">↗</span><p>여행 비용은 무료입니다.<br>이동할 때마다 1턴이 지나고<br>모든 시장 가격이 변동합니다.</p></div>
         </section>
@@ -44,25 +45,38 @@
         <section id="screen-market" class="panel market mobile-active" aria-labelledby="market-title">
           <div class="panel-heading"><div><p class="eyebrow">LOCAL EXCHANGE</p><h2 id="market-title"><span id="market-planet">테라</span> 시장</h2></div><span class="open-badge">거래 가능</span></div>
           <p class="panel-hint">가격은 개당 크레딧입니다. 수량을 정하고 거래하세요.</p>
+          <button id="mission-shortcut" class="mission-shortcut" data-open-screen="contracts"></button>
+          <details class="market-news"><summary id="news-headline"></summary><div id="news-details"></div></details>
           <div id="market-list" class="market-list"></div>
           <p class="market-note">◈ 구매와 판매에는 턴이 소모되지 않습니다.</p>
         </section>
 
         <aside id="screen-cargo" class="panel hold" aria-labelledby="hold-title">
-          <div class="panel-heading"><div><p class="eyebrow">CARGO MANIFEST</p><h2 id="hold-title">내 화물</h2></div><span aria-hidden="true" class="cargo-icon">▤</span></div>
+          <div class="panel-heading"><div><p class="eyebrow">CARGO & SHIP</p><h2 id="hold-title">화물과 함선</h2></div><span aria-hidden="true" class="cargo-icon">▤</span></div>
           <div id="cargo-list" class="cargo-list"></div>
           <div class="cargo-total"><span>화물 평가액</span><strong id="cargo-value">0 C</strong></div>
+          <div class="career-stats"><span>누적 거래 손익 <strong id="realized-profit">0 C</strong></span><span>배송 완료 <strong id="delivery-count">0건</strong></span></div>
+          <section class="ship-upgrade" aria-labelledby="upgrade-title"><p class="eyebrow">SHIP UPGRADE</p><h3 id="upgrade-title">더 큰 화물칸, 더 큰 기회</h3><p id="upgrade-description"></p><button id="upgrade-button" class="buy-button"></button><p class="upgrade-note">확장비는 총자산에서 차감됩니다. 납품과 거래 손익에는 포함되지 않습니다.</p></section>
           <div class="captain-tip"><p class="eyebrow">선장의 팁</p><p>행성마다 잘 만드는 상품이 다릅니다. <strong>저렴한 산지에서 구매</strong>하고, 다른 시장에서 판매해 보세요.</p><p>화물의 가치는 현재 행성 가격에 따라 변합니다. 이동 전에는 판매 예상가를 확인하세요.</p></div>
         </aside>
+        <section id="screen-contracts" class="panel contracts" aria-labelledby="contracts-title">
+          <div class="panel-heading"><div><p class="eyebrow">DELIVERY GUILD</p><h2 id="contracts-title">배송 의뢰</h2></div><span id="contracts-count" class="badge">0건 완료</span></div>
+          <p class="panel-hint">상품을 구해 목적지에 납품하세요. 납품금에 추가 보상이 포함됩니다.</p>
+          <div id="active-contract"></div>
+          <h3 class="offers-title">지금 받을 수 있는 의뢰</h3>
+          <div id="contract-offers" class="contract-offers"></div>
+          <p class="contract-rules">한 번에 1건 · 수락 후 4번의 여행까지 납품 가능 · 구매·납품은 턴 소모 없음<br>시장 판매와 의뢰 납품은 별개입니다. 기한 종료나 포기에 위약금은 없습니다.</p>
+        </section>
       </div>
-      <footer><span>STAR MERCHANT <b>v1.0</b></span><span>다섯 행성, 당신만의 항로.</span></footer>
+      <footer><span>STAR MERCHANT <b>v1.1</b></span><span id="best-record">최단 승리 기록에 도전하세요.</span></footer>
     </main>
   </div>
   <div id="mobile-toast" class="mobile-toast" aria-hidden="true" hidden></div>
   <nav id="mobile-nav" class="mobile-nav" aria-label="게임 화면">
     <button data-screen="market" aria-controls="screen-market" aria-pressed="true"><span aria-hidden="true">◈</span>시장</button>
     <button data-screen="routes" aria-controls="screen-routes" aria-pressed="false"><span aria-hidden="true">↗</span>항로</button>
-    <button data-screen="cargo" aria-controls="screen-cargo" aria-pressed="false"><span aria-hidden="true">▤</span>화물</button>
+    <button data-screen="contracts" aria-controls="screen-contracts" aria-pressed="false"><span aria-hidden="true">◎</span>의뢰</button>
+    <button data-screen="cargo" aria-controls="screen-cargo" aria-pressed="false"><span aria-hidden="true">▤</span>함선</button>
   </nav>
 </body>
 </html>
